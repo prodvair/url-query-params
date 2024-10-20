@@ -1,6 +1,6 @@
 {
   "name": "@prodvair/url-query-params",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Парсинг параметров из ссылки GET запроса.",
   "main": "URLQueryParams.js",
   "scripts": {
