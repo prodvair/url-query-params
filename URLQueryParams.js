@@ -8,14 +8,14 @@ export class URLQueryParams {
     }
 }
 
-Object.defineProperty(QueryURL.prototype, '$queryParams', {
+Object.defineProperty(URLQueryParams.prototype, '$queryParams', {
     get() {
         return this.constructor._queryParams;
     },
 });
-QueryURL.url = null;
-QueryURL._queryParams = {};
-QueryURL.queryAlias = {
+URLQueryParams.url = null;
+URLQueryParams._queryParams = {};
+URLQueryParams.queryAlias = {
     filters: 'f',
     wheres: 'w',
     orders: 'o',
@@ -26,9 +26,9 @@ QueryURL.queryAlias = {
     option: 'opt',
 };
 
-QueryURL.getThisUrl = function (url) {
+URLQueryParams.getThisUrl = function (url) {
     var urlParams = document.location.search;
-    if (url) urlParams = new URL(url).search;
+    if ('string' === typeof url) urlParams = new URL(url).search;
     const searchParams = new URLSearchParams(urlParams);
     const obj = {};
     for (const [key, value] of searchParams.entries()) {
@@ -37,11 +37,11 @@ QueryURL.getThisUrl = function (url) {
     return obj;
 };
 
-QueryURL.convertNumber = function (str) {
+URLQueryParams.convertNumber = function (str) {
     return isNumber(str) ? Number(str) : str;
 };
 
-QueryURL.convert = function (value) {
+URLQueryParams.convert = function (value) {
     if (value === null) return 'null';
     if (value === false) return 'false';
     if (value === true) return 'true';
@@ -52,18 +52,18 @@ QueryURL.convert = function (value) {
     return this.convertNumber(value);
 };
 
-QueryURL.getAliasName = function (name) {
+URLQueryParams.getAliasName = function (name) {
     return this.queryAlias?.[name] || name;
 };
 
-QueryURL.parseAliasName = function (name) {
+URLQueryParams.parseAliasName = function (name) {
     Object.entries(this.queryAlias).forEach(([key, value]) => {
         if (value === name) name = key;
     });
     return name;
 };
 
-QueryURL.queryParamsBuild = function (
+URLQueryParams.queryParamsBuild = function (
     params,
     name = undefined,
     staples = false
@@ -100,13 +100,13 @@ QueryURL.queryParamsBuild = function (
 
     return string;
 };
-QueryURL.prototype.queryParamsBuild = function (
+URLQueryParams.prototype.queryParamsBuild = function (
     params,
 ) {
     return this.constructor.queryParamsBuild(params);
 };
 
-QueryURL.queryParamsParse = function (_queryParams = null, url = null) {
+URLQueryParams.queryParamsParse = function (_queryParams = null, url = null) {
     if (!_queryParams) _queryParams = this.getThisUrl(url);
     var obj;
 
@@ -162,6 +162,6 @@ QueryURL.queryParamsParse = function (_queryParams = null, url = null) {
     return obj;
 };
 
-QueryURL.prototype.queryParamsParse = function (url = null) {
+URLQueryParams.prototype.queryParamsParse = function (url = null) {
     return this.constructor.queryParamsParse(null, url);
 };
