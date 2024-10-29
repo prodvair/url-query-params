@@ -3,6 +3,8 @@
 Parsing and building url GET params with alias
 
 ```
+import { URLQueryParams } from '@prodvair/url-query-params'
+
 const qp = new URLQueryParams(<queryAlias>)
 ```
 
@@ -24,6 +26,10 @@ qp.queryParamsBuild({ a: b, c: [1] })
 ### Default alias:
 
 ```
+import { DEFAULT_ALIAS } from '@prodvair/url-query-params'
+
+console.log(DEFAULT_ALIAS)
+/**
 {
     filters: 'f',
     wheres: 'w',
@@ -34,6 +40,7 @@ qp.queryParamsBuild({ a: b, c: [1] })
     value: 'val',
     option: 'opt',
 }
+*/
 ```
 
 @prodvair
