@@ -90,7 +90,7 @@ URLQueryParams.queryParamsBuild = function (
       });
     }
   } else {
-    string += `${name}=${this.getAliasName(this.convert(params))}&`;
+    string += `${name}=${this.convert(params)}&`;
   }
 
   if (!staples) {
@@ -109,7 +109,7 @@ URLQueryParams.queryParamsParse = function (_queryParams = null, url = null) {
 
   Object.keys(_queryParams).forEach((key) => {
     const params = key.match(/([a-zA-Z0-9]+)|\[[a-zA-Z0-9]*\]/g);
-    const value = this.parseAliasName(this.convert(_queryParams[key]));
+    const value = this.convert(_queryParams[key]);
 
     const recursParse = (names, value, subObj, i = 0) => {
       if (!names[i]) return value;
